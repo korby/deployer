@@ -1,6 +1,6 @@
 # deployer
 
-
+```yaml
 #vhosts.yml
 repository: git@github.com:korby/some-stuff.git
 method: git clone
@@ -17,8 +17,8 @@ vhosts:
     tasks:
       - actions-templates/prod-files-renaming
       - actions-templates/test
-
-
+```
+```yaml
 #hosts.yml
 hosts:
   prod1:
@@ -27,3 +27,4 @@ hosts:
   prod2:
     host:web2.website.net
     user:root
+```
