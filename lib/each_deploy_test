@@ -1,0 +1,16 @@
+# 	$id
+#	$release_path
+#	$shared_path
+#	${!branch}
+#   ${!deploy_to}
+#	${hosts[@]}
+#	${tasks[@]}
+#
+echo -e "----------- $counter Project $green$id$std"
+
+for hostid in "${hosts[@]}"
+do
+	host="hosts_"$hostid"_host"
+	user="hosts_"$hostid"_user"
+	exec_remote ssh ${!user}@${!host} rm /tmp/testouilledemerdouille
+done

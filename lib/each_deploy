@@ -1,0 +1,27 @@
+#
+#	host
+#	user
+#	branch
+#	deploy_to
+#	tasks=
+#
+echo -e "----------- $counter Project $green$id$std"
+echo -e "Branch $green${!branch}$std wille be deployed on $green$release_path$std"
+echo -e "Using $green$shared_path$std as shared path"
+
+string_host=()
+for hostid in "${hosts[@]}"
+do
+	host="hosts_"$hostid"_host"
+	user="hosts_"$hostid"_user"
+	string_host+=(${!user}@${!host})
+done
+
+echo -e "On all these targets $green${string_host[@]}$std"
+echo -e "These tasks will be executed on each target in this order $green${tasks[@]}$std"
+
+for task in "${tasks[@]}"
+do
+ echo ""
+    #echo $task
+done
