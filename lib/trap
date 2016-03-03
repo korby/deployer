@@ -1,0 +1,16 @@
+function on_exit {
+	if [ "$debug" == 1 ] ; then
+		read -p "Agree to delete temporary files [n,Y] ?" agree
+			case $agree in
+				"y" | "Y" | "yes" | "Yes") 
+					echo "Cleaning temporary files...";
+					rm -rf $copy_dir"/"$release_name;;
+				*) echo "Aborted. Don't forget to delete $copy_dir/$release_name after debug" ;;
+			esac
+		else
+			echo "Cleaning temporary files...";
+			rm -rf $copy_dir"/"$release_name;
+	fi
+	
+	
+}

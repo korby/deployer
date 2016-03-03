@@ -1,27 +1,46 @@
-#
-#	host
-#	user
-#	branch
-#	deploy_to
-#	tasks=
-#
-echo -e "----------- $counter Project $green$id$std"
-echo -e "Branch $green${!branch}$std wille be deployed on $green$release_path$std"
-echo -e "Using $green$shared_path$std as shared path"
+# 	$id
+# 	$repository
+# 	$method
+# 	$release_name
+#	$release_path
+#	$shared_path
+#	${!branch}
+#   ${!deploy_to}
+#	${hosts[@]}
+#	${tasks[@]}
 
-string_host=()
+# Abort on error
+set -e;
+
+echo -e "----------- $counter Project $green$id$std"
+
+copy_path=$copy_dir"/"$release_name"/"${!branch}
+
+if [ ! -f "$copy_path/$release_name.tgz" ] ; 
+then
+	exec_wrap "$id:clone" $method $repository $copy_path"/"$release_name
+	exec_wrap "$id:compress" tar -zcf $copy_path/$release_name.tgz -C $copy_path"/" $release_name
+fi
+
 for hostid in "${hosts[@]}"
 do
 	host="hosts_"$hostid"_host"
 	user="hosts_"$hostid"_user"
-	string_host+=(${!user}@${!host})
+
+	echo -e "    ---- Working on host $green"${!host}"$std"
+
+	exec_wrap "$id:scp" scp $copy_path/$release_name.tgz ${!user}@${!host}:/tmp/
+	exec_wrap "$id:remote:mvtarball" ssh ${!user}@${!host} mv /tmp/$release_name.tgz ${!deploy_to}/releases/
+	exec_wrap "$id:remote:untar" ssh ${!user}@${!host} tar -zxf ${!deploy_to}/releases/$release_name.tgz -C ${!deploy_to}/releases/
+	exec_wrap "$id:remote:untar" ssh ${!user}@${!host} rm -f ${!deploy_to}/releases/$release_name.tgz
+
+	for task in "${tasks[@]}"
+	do
+	 echo ""
+	    #echo $task
+	done
 done
 
-echo -e "On all these targets $green${string_host[@]}$std"
-echo -e "These tasks will be executed on each target in this order $green${tasks[@]}$std"
 
-for task in "${tasks[@]}"
-do
- echo ""
-    #echo $task
-done
+
+

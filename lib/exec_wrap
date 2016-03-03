@@ -1,0 +1,15 @@
+function exec_wrap {
+	echo "$@" 2>&1 | tee -a $log_file
+
+	# args line without first argument, first argument indicate the vhost id deploy running
+	"${@:2}" 2>&1 | tee -a $log_file
+	status=${PIPESTATUS[0]}
+
+	if [ "${status}" -ne 0 ] ; 
+	then
+		echo -e "$red Deploy failed on $@ $std";
+		echo "Deploy failed on $@" >> $log_file;
+		exit $status
+	fi 
+
+}
