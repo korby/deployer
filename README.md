@@ -5,13 +5,13 @@
 repository: git@github.com:korby/some-stuff.git
 method: git clone
 vhosts:
-  belair:
+  aName:
     branch:oneversionofmystuff
     deploy_to: /var/www/somewhere/
     tasks:
       - actions-templates/prod-files-renaming
       - actions-templates/test
-  chersancerre:
+  anotherName:
     branch:otherversionofmystuff
     deploy_to: /var/www/somewhere-else/
     tasks:
@@ -27,4 +27,4 @@ hosts:
   prod2:
     host:web2.website.net
     user:root
-```
+``
