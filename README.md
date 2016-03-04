@@ -6,7 +6,7 @@ serverX:/var/vhosts/branch2
 
 ## Usage
 ```bash
-# performs basic tests against yours servers (available via ssh etc.)
+# performs basic tests (are conf files ok, are servers available via ssh ...)
 deploy test
 # push your code
 deploy deploy
@@ -57,7 +57,7 @@ touch beautifull-project/vhosts.yml beautifull-project/hosts.yml
 ```
 
 
-3) Create inside the 2 necessary configuration's files and fille them according matrix above
+3) Create inside the 2 necessary configuration's files and fill them according matrix above
 ```bash
 vi beautifull-project/vhosts.yml 
 vi beautifull-project/hosts.yml
