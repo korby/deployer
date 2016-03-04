@@ -1,5 +1,5 @@
 # Deployer
-Allow to deploy several branches of a same repository in different path on each server/.  
+Allow to deploy several branches of a same repository in different path on many servers.  
 Example:  
 serverX:/var/vhosts/branch1  
 serverX:/var/vhosts/branch2  
@@ -68,6 +68,18 @@ vi beautifull-project/hosts.yml
 cd beautifull-project
 ../deployer deploy
 ```
+
+## Logs
+Deployer logs all commands performed and their returns. Logs are in your project directory in "logs/"
+
+## Tasks
+Tasks are commands executed on remote servers. They must reside in text files (whithout shebang), all commands inside a file must end with ";"
+
+A) Tasks common
+Usefull dor many projects they are stored in Deployer itself. If you prefix a task with "tasks-common" Deployer will look for it inside its own directory "tasks-common".
+
+B) Other tasks
+You can store them where you want, provided you indicate the path ine the yaml configuration file.
 
 ## WARNING
 Deployer use a vhost directory architecture similar than Capistrano, ie :  
