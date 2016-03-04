@@ -5,7 +5,7 @@ serverX:/var/vhosts/branch1
 serverX:/var/vhosts/branch2  
 
 ## Usage
-```
+```bash
 # performs basic tests against yours servers (available via ssh etc.)
 deploy test
 # push your code
