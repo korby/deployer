@@ -75,10 +75,10 @@ Deployer logs all commands performed and their returns. Logs are in your project
 ## Tasks
 Tasks are commands executed on remote servers. They must reside in text files (whithout shebang), all commands inside a file must end with ";"
 
-A) Tasks common
+A) Tasks common  
 Usefull dor many projects they are stored in Deployer itself. If you prefix a task with "tasks-common" Deployer will look for it inside its own directory "tasks-common".
 
-B) Other tasks
+B) Other tasks  
 You can store them where you want, provided you indicate the path ine the yaml configuration file.
 
 ## WARNING
