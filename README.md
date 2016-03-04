@@ -46,25 +46,25 @@ hosts:
 
 ## How to use Deployer
 1) Get it
-```
+```bash
 git clone git@github.com:korby/deployer.git
 ```
 
 2) make a directory somewhere from where you will execute Deployer.
-```
+```bash
 mkdir beautifull-project
 touch beautifull-project/vhosts.yml beautifull-project/hosts.yml
 ```
 
 
 3) Create inside the 2 necessary configuration's files and fille them according matrix above
-```
+```bash
 vi beautifull-project/vhosts.yml 
 vi beautifull-project/hosts.yml
 ```
 
 4) Run Deployer
-```
+```bash
 cd beautifull-project
 ../deployer deploy
 ```
