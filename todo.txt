@@ -1,4 +1,3 @@
-- add feature keep_releases : delete older releases
 - add some remote clean tasks in case of failure
 - add rollback feature
 - add mail notification
