@@ -42,7 +42,7 @@ hosts:
   prod2:
     host:web2.website.net
     user:root
-``
+```
 
 ## How to use Deployer
 1) Get it
