@@ -45,6 +45,10 @@ hosts:
 ```
 
 ## How to use Deployer
+On the very first step, **on the machine where you will execute Deployer**, you need:  
+* ssh rsa public key installed in git repository settings
+* ssh rsa public key installed on all remote servers
+
 1) Get it
 ```bash
 git clone git@github.com:korby/deployer.git
