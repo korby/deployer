@@ -2,6 +2,7 @@
 abs_path=$(dirname "$0")
 log_dir=./logs
 copy_dir=./tmp
+keep_releases=4
 if [ ! -d "$log_dir" ] ; then mkdir -p $log_dir; fi
 
 . $abs_path/lib/yaml_parse

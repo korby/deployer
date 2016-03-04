@@ -56,5 +56,9 @@ do
 
 	replace_vars $abs_path"/tasks-native/current-new-release"
 	exec_wrap "$id:task:publish" ssh ${!user}@${!host} $commmand
+
+	# keep_releases : delete too old releases
+	replace_vars $abs_path"/tasks-native/keep-releases"
+	exec_wrap "$id:task:keep_releases" ssh ${!user}@${!host} $commmand
 done
 

@@ -1,0 +1,10 @@
+total=$(ls -rt %deploy_to/releases/ | wc -l);
+if [ $total -gt %keep_releases ]; then
+	i=1;
+	stop=$((total - %keep_releases));
+	for dir in $(ls -rt %deploy_to/releases/);
+	do
+		if [ $i -lt $stop ]; then rm -rf %deploy_to/releases/$dir; fi;
+		((i++));
+	done;
+fi;
