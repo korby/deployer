@@ -14,14 +14,14 @@ vhosts:
     branch:oneversionofmystuff
     deploy_to: /var/www/somewhere/
     tasks:
-      - actions-templates/prod-files-renaming
-      - actions-templates/test
+      - tasks-common/prod-files-renaming
+      - some/path/some-file-containing-bash-commands
   anotherName:
     branch:otherversionofmystuff
     deploy_to: /var/www/somewhere-else/
     tasks:
-      - actions-templates/prod-files-renaming
-      - actions-templates/test
+      - tasks-common/prod-files-renaming
+      - some/path/some-file-containing-bash-commands
 ```
 ```yaml
 #hosts.yml
