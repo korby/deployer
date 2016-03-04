@@ -1,5 +1,5 @@
 # Deployer
-Allow to deploy several branches of a same repository in different path on many servers.  
+Allow to deploy several branches of a same repository to different path on many servers.  
 Example:  
 serverX:/var/vhosts/branch1  
 serverX:/var/vhosts/branch2  
