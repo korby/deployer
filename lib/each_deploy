@@ -30,12 +30,18 @@ do
 
 	echo -e "              ---- Working on host $green"${!host}"$std"
 
+	. $abs_path/lib/replace_vars
+
+	# Get previous release name
+	replace_vars $abs_path"/tasks-native/previous-release"
+	retvalue=`ssh ${!user}@${!host} $commmand`
+	if [ $retvalue != "" ]; then eval $retvalue; fi;
+
 	exec_wrap "$id:scp" scp $copy_path/$release_name.tgz ${!user}@${!host}:/tmp/
 	exec_wrap "$id:remote:mvtarball" ssh ${!user}@${!host} mv /tmp/$release_name.tgz ${!deploy_to}/releases/
 	exec_wrap "$id:remote:untar" ssh ${!user}@${!host} tar -zxf ${!deploy_to}/releases/$release_name.tgz -C ${!deploy_to}/releases/
 	exec_wrap "$id:remote:untar" ssh ${!user}@${!host} rm -f ${!deploy_to}/releases/$release_name.tgz
 
-	. $abs_path/lib/replace_vars
 	for task in "${tasks[@]}"
 	do
 		if [[ $task == "tasks-common"* ]] ; 
@@ -43,11 +49,11 @@ do
 			 replace_vars $abs_path"/"$task
 			 exec_wrap "$id:task:$task" ssh ${!user}@${!host} $commmand
 			else
+			 replace_vars $abs_path"/"$task
 			 exec_wrap "$id:task:$task" ssh ${!user}@${!host} $commmand
 		fi
 	done
 
-	commmand=""
 	replace_vars $abs_path"/tasks-native/current-new-release"
 	exec_wrap "$id:task:publish" ssh ${!user}@${!host} $commmand
 done

@@ -1,1 +1,1 @@
-find #release_path -name '*-at-preprod' | sed 's/\(.*\)-at-preprod$/mv & \1/' | sh
+find %release_path -name '*-at-preprod' | sed 's/\(.*\)-at-preprod$/mv & \1/' | sh

@@ -56,6 +56,7 @@ do
 
 	release_path=${!deploy_to}/releases/$release_name/
 	shared_path=${!deploy_to}/shared/
+	previous_release=""
 
 	. $abs_path/lib/$action
 

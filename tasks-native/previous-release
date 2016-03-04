@@ -1,0 +1,6 @@
+res=0;
+for dir in $(ls %deploy_to/releases/);
+do
+	if [ $dir -gt $res ]; then res=$dir; fi;
+done;
+echo "previous_release=%deploy_to/releases/$res";

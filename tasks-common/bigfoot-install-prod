@@ -1,0 +1,10 @@
+if [ -d '%release_path/app/cache' ]; then rm -rf %release_path/app/cache; fi; 
+umask 000; mkdir %release_path/app/cache;
+rm -rf %release_path/app/logs;
+ln -nfs %shared_path/log %release_path/app/logs;
+
+rm -rf %release_path/web/uploads;
+ln -nfs %shared_path/web/uploads %release_path/web/uploads;
+rm -rf %release_path/web/media;
+if [ -d %shared_path/web/media ]; then ln -nfs %shared_path/web/media %release_path/web/media; fi;
+if [ -d %previous_release/vendor ]; then cp -Rf %previous_release/vendor %release_path/vendor; fi;

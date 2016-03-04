@@ -1,8 +1,9 @@
 # Use to change all pseudo vars by their value in tasks file 
 function replace_vars {
 	original=$(cat $1)
-	commmand=${original//#release_path/$release_path}
-	commmand=${commmand//#shared_path/$shared_path}
-	commmand=${commmand//#release_name/$release_name}
-	commmand=${commmand//#deploy_to/${!deploy_to}}
+	commmand=${original//%release_path/$release_path}
+	commmand=${commmand//%shared_path/$shared_path}
+	commmand=${commmand//%release_name/$release_name}
+	commmand=${commmand//%deploy_to/${!deploy_to}}
+	commmand=${commmand//%previous_release/$previous_release}
 }
