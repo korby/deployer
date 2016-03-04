@@ -1,0 +1,1 @@
+find #release_path -name '*-at-prod' | sed 's/\(.*\)-at-prod$/mv & \1/' | sh

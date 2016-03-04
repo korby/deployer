@@ -12,7 +12,7 @@ if [ ! -d "$log_dir" ] ; then mkdir -p $log_dir; fi
 trap "on_exit" SIGINT SIGTERM INT TERM EXIT;
 #parse_yaml vhosts.yml
 #parse_yaml hosts.yml
-
+if [ ! -f vhosts.yml ] || [ ! -f hosts.yml ] ; then echo -e $red"No Configuration's files here!"$std; exit 1; fi
 eval $(parse_yaml vhosts.yml)
 vhosts=(${ids[@]})
 ids=()
@@ -41,11 +41,9 @@ case $switcher in
     test )
         action=each_deploy_test ;;
     deploy )
-	echo -e "$green Deploying release $release_name$std";
+	echo -e $green"Deploying release $release_name"$std;
         action=each_deploy ;;
 esac
-
-
 
 counter=1
 for id in "${vhosts[@]}"
@@ -56,8 +54,8 @@ do
 	tasks="vhosts_"$id"_tasks"
 	eval "tasks=(\${$tasks[@]})"
 
-	release_path=${!deploy_to}releases/$release_name/
-	shared_path=${!deploy_to}shared/
+	release_path=${!deploy_to}/releases/$release_name/
+	shared_path=${!deploy_to}/shared/
 
 	. $abs_path/lib/$action
 

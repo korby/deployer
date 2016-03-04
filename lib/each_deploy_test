@@ -18,3 +18,5 @@ do
 	user="hosts_"$hostid"_user"
 	exec_wrap "$id:test" ssh ${!user}@${!host} ls ${!deploy_to}
 done
+
+echo -e $green"Ok things seems to be all right"$std

@@ -1,0 +1,2 @@
+if [ -f #deploy_to/current ] ; then rm #deploy_to/current; fi;
+ln -nfs #release_path #deploy_to/current;
