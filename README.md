@@ -1,8 +1,8 @@
 # deployer
 Allow to deploy several branches of a same repository in different path on each server/.  
-Example:
-serverX:/var/vhosts/branch1
-serverX:/var/vhosts/branch2
+Example:  
+serverX:/var/vhosts/branch1  
+serverX:/var/vhosts/branch2  
 
 
 ```yaml
