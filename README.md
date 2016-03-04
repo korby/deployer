@@ -70,7 +70,7 @@ cd beautifull-project
 ```
 
 ## WARNING
-Deployer use a vhost directory architecture similar than Capistrano, ie :
+Deployer use a vhost directory architecture similar than Capistrano, ie :  
 releases/
 shared/
 current (a symlink to > releases/xxx)
