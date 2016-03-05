@@ -1,14 +1,26 @@
 function exec_wrap {
 	echo "$@" 2>&1 | tee -a $log_file
 
-	# args line without first argument, first argument indicate the vhost id deploy running
-	"${@:2}" 2>&1 | tee -a $log_file
-	status=${PIPESTATUS[0]}
+	# args line without first argument, first argument indicates the vhost id deploy running
+	returned=$("${@:2}" 2>&1)
+	# old method when command was launched this way $("${@:2}" 2>&1) | tee -a $log_file
+	#status=${PIPESTATUS[0]}
+	status=$?
 
-	if [ "${status}" -ne 0 ] ; 
+	if [ "$returned" != "" ] ; then
+		echo "return: "$returned | tee -a $log_file
+		if [[ "$returned" == "bash: "* ]] || [[ "$returned" == "sh: "* ]] ; then
+			echo -e "$red Deploy failed on $@ because of remote interpreter syntax error $std";
+			echo "Deploy failed on $@ because of remote interpreter syntax error " >> $log_file;
+			exit 1
+		fi
+
+	fi
+
+	if [ "$status" -ne 0 ] ; 
 	then
-		echo -e "$red Deploy failed on $@ $std";
-		echo "Deploy failed on $@" >> $log_file;
+		echo -e "$red Deploy failed on $@ with status $status $std";
+		echo "Deploy failed on $@ with status $status" >> $log_file;
 		exit $status
 	fi 
 
