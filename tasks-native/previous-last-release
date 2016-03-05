@@ -16,4 +16,4 @@ do
 	fi;
 done;
 
-echo "last_release=%deploy_to/releases/$last; previous_last_release=%deploy_to/releases/$pre_last";
+echo "last_release_name=$last;last_release=%deploy_to/releases/$last; previous_last_release=%deploy_to/releases/$pre_last";

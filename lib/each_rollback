@@ -33,8 +33,11 @@ do
 			echo -e $yellow"$msg"$std;
 			echo $msg >> $log_file
 			replace_vars $abs_path"/tasks-native/current-previous-last-release"
-			exec_wrap "$id:task:publish" ssh ${!user}@${!host} $commmand
-
+			exec_wrap "$id:task:rollback" ssh ${!user}@${!host} $commmand
+			
+			msg="Backup release rollbacked"
+			echo -e $yellow"$msg"$std;
+			exec_wrap "$id:task:rollback:archive" ssh ${!user}@${!host} mv $last_release ${!deploy_to}/$last_release_name"-rollbacked"
 	else
 		err="No previous release found"
 		echo -e $red"$err"$std
