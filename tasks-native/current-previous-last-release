@@ -1,0 +1,2 @@
+if [ -f %deploy_to/current ] ; then rm %deploy_to/current; fi;
+ln -nfs %previous_last_release %deploy_to/current;

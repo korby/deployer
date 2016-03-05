@@ -6,5 +6,6 @@ function replace_vars {
 	commmand=${commmand//%release_name/$release_name}
 	commmand=${commmand//%deploy_to/${!deploy_to}}
 	commmand=${commmand//%previous_release/$previous_release}
-		commmand=${commmand//%keep_releases/$keep_releases}
+	commmand=${commmand//%previous_last_release/$previous_last_release}
+	commmand=${commmand//%keep_releases/$keep_releases}
 }

@@ -32,7 +32,7 @@ do
 
 	. $abs_path/lib/replace_vars
 
-	# Get previous release name
+	# Get previous release path
 	replace_vars $abs_path"/tasks-native/previous-release"
 	retvalue=`ssh ${!user}@${!host} $commmand`
 	if [ $retvalue != "" ]; then eval $retvalue; fi;

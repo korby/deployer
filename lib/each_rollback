@@ -1,0 +1,47 @@
+# 	$id
+# 	$repository
+# 	$method
+# 	$release_name
+#	$release_path
+#	$shared_path
+#	${!branch}
+#   ${!deploy_to}
+#	${hosts[@]}
+#	${tasks[@]}
+
+# Abort on error
+set -e;
+
+echo -e "----------- $counter Project $green$id$std"
+
+for hostid in "${hosts[@]}"
+do
+	host="hosts_"$hostid"_host"
+	user="hosts_"$hostid"_user"
+
+	echo -e "              ---- Working on host $green"${!host}"$std"
+
+	. $abs_path/lib/replace_vars
+
+	# Get release path to activate and current active release
+	replace_vars $abs_path"/tasks-native/previous-last-release"
+	retvalue=`ssh ${!user}@${!host} $commmand`
+	if [ "$retvalue" != "" ]; 
+		then 
+			eval $retvalue;
+			msg="Changing current target from $last_release to $previous_last_release"
+			echo -e $yellow"$msg"$std;
+			echo $msg >> $log_file
+			replace_vars $abs_path"/tasks-native/current-previous-last-release"
+			exec_wrap "$id:task:publish" ssh ${!user}@${!host} $commmand
+
+	else
+		err="No previous release found"
+		echo -e $red"$err"$std
+		echo $err >> $log_file
+		exit 1;
+	fi;
+
+	
+done
+

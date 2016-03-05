@@ -41,9 +41,14 @@ done
 case $switcher in
     test )
         action=each_deploy_test ;;
+
     deploy )
-	echo -e $green"Deploying release $release_name"$std;
-        action=each_deploy ;;
+	echo -e $green"Deploying release $release_name and loging in $log_file"$std;
+    action=each_deploy ;;
+
+    rollback )
+	echo -e $green"Rollbacking $release_name and loging in $log_file"$std;
+    action=each_rollback ;;
 esac
 
 counter=1
