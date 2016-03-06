@@ -14,6 +14,8 @@ deploy deploy
 deploy -d deploy
 # re-activate previous release and backup the last deployed for debuging check
 deploy rollback
+# simulation mode : don't perform final commands on remote serveur, just show them
+deploy -s rollback
 # execute shell command on each server in each vhost (contextual var can be used : %deploy_to, %shared_path etc.)
 deploy exec
 
