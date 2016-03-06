@@ -93,7 +93,7 @@ B) Other tasks
 You can store them where you want, provided you indicate the path ine the yaml configuration file.
 
 ## WARNING
-Deployer use a vhost directory architecture similar than Capistrano, ie :  
+Deployer use a vhost directory architecture similar to Capistrano, ie :  
 releases/  
 shared/  
 current (a symlink to > releases/xxx)  
