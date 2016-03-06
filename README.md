@@ -7,17 +7,17 @@ serverX:/var/vhosts/branch2
 ## Usage
 ```bash
 # performs basic tests (are conf files ok, are servers available via ssh ...)
-deploy test
+deployer test
 # push your code
-deploy deploy
+deployer deploy
 # debug mode, after push tentative deployer keep temporary files
-deploy -d deploy
+deployer -d deploy
 # re-activate previous release and backup the last deployed for debuging check
-deploy rollback
+deployer rollback
 # simulation mode : don't perform final commands on remote serveur, just show them
-deploy -s rollback
+deployer -s rollback
 # executes shell command on each server in each vhost (contextual var can be used : %deploy_to, %shared_path etc.)
-deploy exec
+deployer exec
 
 ```
 
