@@ -12,6 +12,11 @@ deploy test
 deploy deploy
 # debug mode, after push tentative deployer keep temporary files
 deploy -d deploy
+# re-activate previous release and backup the last deployed for debuging check
+deploy rollback
+# execute shell command on each server in each vhost (contextual var can be used : %deploy_to, %shared_path etc.)
+deploy exec
+
 ```
 
 ## Configuration matrix

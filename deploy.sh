@@ -56,7 +56,7 @@ case $switcher in
     exec )
 		if [ "$debug" == 1 ]; then track "warning" "-d not allowed with $switcher"; exit 1; fi;
 
-		track "warning" "That Command will be executed on each server for each vhost (don't forget you can user these kind of replacement: %deploy_to, %shared_path etc.)!";
+		track "warning" "That Command will be executed on each server for each vhost (don't forget you can use these kind of replacement: %deploy_to, %shared_path etc.)!";
 		read -p "Sure to execute it [n,Y] ?" agree
 		case $agree in
 			"y" | "Y" | "yes" | "Yes") 
