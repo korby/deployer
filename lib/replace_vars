@@ -1,6 +1,12 @@
 # Use to change all pseudo vars by their value in tasks file 
 function replace_vars {
-	original=$(cat $1)
+	if [ -f "$1" ]; 
+		then
+			original=$(cat $1)
+		else
+			original="$@"
+	fi
+	
 	commmand=${original//%release_path/$release_path}
 	commmand=${commmand//%shared_path/$shared_path}
 	commmand=${commmand//%release_name/$release_name}

@@ -5,7 +5,7 @@
 #	deploy_to
 #	tasks=
 #
-track "screen" "----------- $counter Project $green$id$std"
+track "screen" "$green$counter) Project $id$std"
 track "screen" "Branch $green${!branch}$std wille be deployed on $green$release_path$std"
 track "screen" "Using $green$shared_path$std as shared path"
 
