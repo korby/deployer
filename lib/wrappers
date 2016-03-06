@@ -1,0 +1,60 @@
+# print in the right channels (stdout and/or logfile) with the right format (flat text or colored output)
+# $1 : type of tracking
+# $2 : tracking string to report
+function track {
+
+	date_tag="["$(date +"%Y-%m-%d %H:%M:%S")"] "
+	log_light="$2"
+	log_all="${@:2}"
+
+	screen_log=$log_light
+
+	case $1 in
+		"screen" )
+	        echo -e $screen_log;
+	        ;;
+	    "info" )
+	        echo -e "$screen_log";
+	        printf "\n$date_tag%s" "$log_all" >> $log_file;
+	        ;;
+	   	"cool" )
+	        echo -e $green"$screen_log"$std;
+	        printf "\n$date_tag%s" "$log_all" >> $log_file;
+	        ;;
+	    "warning" )
+	        echo -e $yellow"$screen_log"$std;
+	        printf "\n$date_tag%s" "$log_all" >> $log_file;
+	        ;;
+	    "error" )
+	        echo -e $red"$screen_log"$std;
+	        printf "\n$date_tag%s" "$log_all" >> $log_file;
+	        ;;
+	esac
+}
+
+function exec_wrap {
+	track "info"  "$@"
+
+	# args line without first argument, first argument indicates the vhost id deploy running
+	returned=$("${@:2}" 2>&1)
+	# old method when command was launched this way $("${@:2}" 2>&1) | tee -a $log_file
+	#status=${PIPESTATUS[0]}
+	status=$?
+
+	if [ "$returned" != "" ] ; then
+		track "warning" "return: $returned"
+		if [[ "$returned" == "bash: "* ]] || [[ "$returned" == "sh: "* ]] ; then
+			track "error" "Deploy failed on $@ because of remote interpreter syntax error";
+			exit 1
+		fi
+
+	fi
+
+	if [ "$status" -ne 0 ] ; 
+	then
+		track "error" "Deploy failed on $@ with status $status";
+		exit $status
+	fi 
+
+}
+

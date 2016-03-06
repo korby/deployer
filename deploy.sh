@@ -7,13 +7,13 @@ if [ ! -d "$log_dir" ] ; then mkdir -p $log_dir; fi
 
 . $abs_path/lib/yaml_parse
 . $abs_path/lib/colors
-. $abs_path/lib/exec_wrap
+. $abs_path/lib/wrappers
 . $abs_path/lib/trap
 
 trap "on_exit" SIGINT SIGTERM INT TERM EXIT;
 #parse_yaml vhosts.yml
 #parse_yaml hosts.yml
-if [ ! -f vhosts.yml ] || [ ! -f hosts.yml ] ; then echo -e $red"No Configuration's files here!"$std; exit 1; fi
+if [ ! -f vhosts.yml ] || [ ! -f hosts.yml ] ; then track "screen" $red"No Configuration's files here!"$std; exit 1; fi
 eval $(parse_yaml vhosts.yml)
 vhosts=(${ids[@]})
 ids=()
@@ -25,15 +25,18 @@ log_file=$log_dir"/"$release_name".log"
 
 action=""
 if [ $# -eq 0 ] ; then
-	echo -e "This repository $green$repository$std will be cloned by method $green$method$std"
-	echo -e "and deployed according this settings :"
+	track "screen" "This repository $green$repository$std will be cloned by method $green$method$std"
+	track "screen" "and deployed according this settings :"
     action=each_info
 fi
 
 switcher=$1
-while getopts d options
+while getopts ds options
 do	case "$options" in
     d)  debug=1
+		switcher=$2
+		;;
+	s)  simulate=1
 		switcher=$2
 		;;
 	esac
@@ -43,11 +46,11 @@ case $switcher in
         action=each_deploy_test ;;
 
     deploy )
-	echo -e $green"Deploying release $release_name and loging in $log_file"$std;
+	track "screen" $green"Deploying release $release_name and loging in $log_file"$std;
     action=each_deploy ;;
 
     rollback )
-	echo -e $green"Rollbacking $release_name and loging in $log_file"$std;
+	track "screen" $green"Rollbacking $release_name and loging in $log_file"$std;
     action=each_rollback ;;
 esac
 

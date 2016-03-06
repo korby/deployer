@@ -10,13 +10,15 @@
 #	${tasks[@]}
 #
 
-echo -e "----------- $counter Project $green$id$std"
+track "screen" "$green$counter) Project $id$std"
 
 for hostid in "${hosts[@]}"
 do
 	host="hosts_"$hostid"_host"
 	user="hosts_"$hostid"_user"
-	exec_wrap "$id:test" ssh ${!user}@${!host} ls ${!deploy_to}
+
+	track "screen" "Working on host $green"${!host}"$std"
+	exec_wrap "$id:test:listremotefiles" ssh ${!user}@${!host} ls ${!deploy_to}
 done
 
-echo -e $green"Ok things seems to be all right"$std
+track "screen" $green"Ok things seems to be all right"$std

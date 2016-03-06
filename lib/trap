@@ -3,12 +3,12 @@ function on_exit {
 		read -p "Agree to delete temporary files [n,Y] ?" agree
 			case $agree in
 				"y" | "Y" | "yes" | "Yes") 
-					echo "Cleaning temporary files...";
+					track "info" "Cleaning temporary files...";
 					rm -rf $copy_dir"/"$release_name;;
-				*) echo "Aborted. Don't forget to delete $copy_dir/$release_name after debug" ;;
+				*) track "info" "Aborted. Don't forget to delete $copy_dir/$release_name after debug" ;;
 			esac
 		else
-			echo "Cleaning temporary files...";
+			track "info" "Cleaning temporary files...";
 			rm -rf $copy_dir"/"$release_name;
 	fi
 	
