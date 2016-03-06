@@ -1,3 +1,2 @@
 - add some remote clean tasks in case of failure
-- add rollback feature
 - add mail notification
