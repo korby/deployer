@@ -24,11 +24,6 @@ release_name=$(date +%Y%m%d%H%M%S)
 log_file=$log_dir"/"$release_name".log"
 
 action=""
-if [ $# -eq 0 ] ; then
-	track "screen" "This repository $green$repository$std will be cloned by method $green$method$std"
-	track "screen" "and deployed according this settings :"
-    action=each_info
-fi
 
 switcher=$1
 while getopts ds options
@@ -66,6 +61,12 @@ case $switcher in
 		esac
 	 ;;
 
+  	"")
+		# If not args
+        track "screen" "This repository $green$repository$std will be cloned by method $green$method$std"
+		track "screen" "and deployed according this settings :"
+    	action=each_info
+        ;;
     *)
         track "screen" "Unknown action";
         exit 1;;
