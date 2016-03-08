@@ -61,6 +61,8 @@ As very first step, **from the machine where you will execute Deployer**, you ne
 * add local ssh rsa public key to your remote git repository settings (gitlab, github, bitbucket...)
 * install local ssh rsa public key on all remote servers
 
+Then:  
+
 1) Get it
 ```bash
 git clone git@github.com:korby/deployer.git
