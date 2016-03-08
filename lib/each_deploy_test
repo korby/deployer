@@ -21,4 +21,4 @@ do
 	exec_wrap "$id:test:listremotefiles" ssh ${!user}@${!host} ls ${!deploy_to}
 done
 
-track "screen" $green"Ok things seems to be all right"$std
+track "screen" $green"Ok things seem to be all right"$std
