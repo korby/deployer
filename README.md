@@ -98,7 +98,7 @@ B) Other tasks
 You can store them where you want, provided you indicate the path in the yaml configuration file.
 
 ## Vars
-Add all vars you need in the vars.yml. You can use the corresponding value anywhere in a task using that pattern : %myvar 
+Add all vars you need in the vars.yml. You can get and use the corresponding value anywhere in a task using that pattern : %myvar 
 
 ## WARNING
 Deployer use a vhost directory architecture similar to Capistrano, ie :  
