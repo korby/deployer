@@ -57,7 +57,7 @@ vars:
   myvar: myvalue
 ```
 ## How to use Deployer
-On the very first step, **from the machine where you will execute Deployer**, you need to:  
+As very first step, **from the machine where you will execute Deployer**, you need to:  
 * add local ssh rsa public key to your remote git repository settings (gitlab, github, bitbucket...)
 * install local ssh rsa public key on all remote servers
 
