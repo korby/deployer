@@ -68,7 +68,7 @@ Then:
 git clone git@github.com:korby/deployer.git
 ```
 
-2) make a directory somewhere from where you will execute Deployer.
+2) Make a directory somewhere from where you will execute Deployer.
 ```bash
 mkdir beautifull-project
 touch beautifull-project/vhosts.yml beautifull-project/hosts.yml
