@@ -90,7 +90,7 @@ A) Tasks common
 Usefull for many projects they are stored in Deployer itself. If you prefix a task with "tasks-common" Deployer will look for it inside its own directory "tasks-common".
 
 B) Other tasks  
-You can store them where you want, provided you indicate the path ine the yaml configuration file.
+You can store them where you want, provided you indicate the path in the yaml configuration file.
 
 ## WARNING
 Deployer use a vhost directory architecture similar to Capistrano, ie :  
