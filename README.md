@@ -75,10 +75,11 @@ touch beautifull-project/vhosts.yml beautifull-project/hosts.yml
 ```
 
 
-3) Create inside the 2 necessary configuration's files and fill them according to the matrix above
+3) Create inside the 3 necessary configuration's files and fill them according to the matrix above
 ```bash
 vi beautifull-project/vhosts.yml 
 vi beautifull-project/hosts.yml
+vi beautifull-project/vars.yml
 ```
 
 4) Run Deployer
