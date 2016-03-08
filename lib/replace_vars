@@ -14,4 +14,10 @@ function replace_vars {
 	commmand=${commmand//%previous_release/$previous_release}
 	commmand=${commmand//%previous_last_release/$previous_last_release}
 	commmand=${commmand//%keep_releases/$keep_releases}
+
+	for varid in "${vars[@]}"
+	do
+		val="vars_"$varid
+		commmand=${commmand//%"$varid"/${!val}}
+	done
 }

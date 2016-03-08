@@ -9,9 +9,6 @@
 #	${hosts[@]}
 #	${tasks[@]}
 
-# Abort on error
-set -e;
-
 track "screen" "$counter) Project $green$id$std"
 
 for hostid in "${hosts[@]}"

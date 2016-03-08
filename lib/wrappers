@@ -33,28 +33,56 @@ function track {
 }
 
 function exec_wrap {
-	track "info"  "$@"
 
-	# args line without first argument, first argument indicates the vhost id deploy running
-	returned=$("${@:2}" 2>&1)
-	# old method when command was launched this way $("${@:2}" 2>&1) | tee -a $log_file
-	#status=${PIPESTATUS[0]}
-	status=$?
+ 	if [ "$2" == "ssh" ];
+        then
+         ssh_prefix="$2 $3 ";
+         comm="${@:4}"
+     else
+        ssh_prefix="";
+         comm="${@:2}"
+    fi
+    
+    IFSBACK=$IFS
+    IFS=$'\n'
+        for line in $comm
+        do
+            track "info" "$1" $ssh_prefix$line
+            IFS=$IFSBACK
+            execute $ssh_prefix$line
+            IFS=$'\n'
+        done
+    IFS=$IFSBACK
 
-	if [ "$returned" != "" ] ; then
-		track "warning" "return: $returned"
-		if [[ "$returned" == "bash: "* ]] || [[ "$returned" == "sh: "* ]] ; then
-			track "error" "Deploy failed on $@ because of remote interpreter syntax error";
-			exit 1
-		fi
+}
 
-	fi
+# use only for launch native tasks : allow to run a whole task file in one command (easier to read )
+function exec_bloc_wrap {
+	track "info"  "$1" "${@:2}"
+ 	execute "${@:2}";
+}
 
-	if [ "$status" -ne 0 ] ; 
-	then
-		track "error" "Deploy failed on $@ with status $status";
-		exit $status
-	fi 
+function execute {
+    # args line without first argument, first argument indicates the vhost id deploy running
+    returned=$("$@" 2>&1)
+    # old method when command was launched this way $("${@:2}" 2>&1) | tee -a $log_file
+    #status=${PIPESTATUS[0]}
+    status=$?
+
+    if [ "$returned" != "" ] ; then
+        track "warning" "return: $returned"
+        if [[ "$returned" == "bash: "* ]] || [[ "$returned" == "sh: "* ]] ; then
+            track "error" "Deploy failed because of bash error.";
+            exit 1
+        fi
+
+    fi
+
+    if [ "$status" -ne 0 ] ; 
+    then
+        track "error" "Deploy failed with status $status.";
+        exit $status
+    fi 
 
 }
 

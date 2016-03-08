@@ -10,15 +10,20 @@ if [ ! -d "$log_dir" ] ; then mkdir -p $log_dir; fi
 . $abs_path/lib/wrappers
 . $abs_path/lib/trap
 
-trap "on_exit" SIGINT SIGTERM INT TERM EXIT;
+trap "on_exit" SIGINT SIGTERM INT TERM EXIT ERR;
 #parse_yaml vhosts.yml
 #parse_yaml hosts.yml
+#parse_yaml vars.yml
+#exit 1
+
 if [ ! -f vhosts.yml ] || [ ! -f hosts.yml ] ; then track "screen" $red"No Configuration's files here!"$std; exit 1; fi
 eval $(parse_yaml vhosts.yml)
 vhosts=(${ids[@]})
 ids=()
 eval $(parse_yaml hosts.yml)
 hosts=(${ids[@]})
+eval $(parse_yaml vars.yml)
+vars=(${ids[@]})
 
 release_name=$(date +%Y%m%d%H%M%S)
 log_file=$log_dir"/"$release_name".log"
