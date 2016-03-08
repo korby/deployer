@@ -68,7 +68,7 @@ touch beautifull-project/vhosts.yml beautifull-project/hosts.yml
 ```
 
 
-3) Create inside the 2 necessary configuration's files and fill them according matrix above
+3) Create inside the 2 necessary configuration's files and fill them according to the matrix above
 ```bash
 vi beautifull-project/vhosts.yml 
 vi beautifull-project/hosts.yml
@@ -84,7 +84,7 @@ cd beautifull-project
 Deployer logs all commands performed and their returns. Logs are in your project directory in "logs/"
 
 ## Tasks
-Tasks are commands executed on remote servers. They must reside in text files (whithout shebang), all commands inside a file must end with ";"
+Tasks are commands executed on remote servers. They must reside in text files (whithout shebang) : one command per line, each line ended with ";"
 
 A) Tasks common  
 Usefull for many projects they are stored in Deployer itself. If you prefix a task with "tasks-common" Deployer will look for it inside its own directory "tasks-common".

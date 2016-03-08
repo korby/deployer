@@ -69,7 +69,7 @@ case $switcher in
   	"")
 		# If not args
         track "screen" "This repository $green$repository$std will be cloned by method $green$method$std"
-		track "screen" "and deployed according this settings :"
+		track "screen" "and deployed according to this settings :"
     	action=each_info
         ;;
     *)
