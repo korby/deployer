@@ -50,7 +50,12 @@ hosts:
     host:web2.website.net
     user:root
 ```
-
+```yaml
+#vars.yml
+vars:
+  composer: /var/www/composer.phar
+  myvar: myvalue
+```
 ## How to use Deployer
 On the very first step, **from the machine where you will execute Deployer**, you need to:  
 * add local ssh rsa public key to your remote git repository settings (gitlab, github, bitbucket...)
@@ -91,6 +96,9 @@ Usefull for many projects they are stored in Deployer itself. If you prefix a ta
 
 B) Other tasks  
 You can store them where you want, provided you indicate the path in the yaml configuration file.
+
+## Vars
+Add all var you need in the vars.yml. You can use the corresponding value anywhere in a task using that pattern : %myvar 
 
 ## WARNING
 Deployer use a vhost directory architecture similar to Capistrano, ie :  
