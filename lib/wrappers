@@ -81,6 +81,10 @@ function execute {
     if [ "$status" -ne 0 ] ; 
     then
         track "error" "Deploy failed with status $status.";
+        if [ "$email" != "" ]; 
+			then
+			echo "Below the content of the log file $log_file" | cat - $log_file | mail -s "Deployment of $repository: failed" $email
+		fi
         exit $status
     fi 
 

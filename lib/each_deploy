@@ -59,5 +59,11 @@ do
 	# keep_releases : delete too old releases
 	replace_vars $abs_path"/tasks-native/keep-releases"
 	exec_bloc_wrap "$id:remote:task:keep_releases" ssh ${!user}@${!host} "$commmand"
+
 done
+
+if [ "$email" != "" ]; 
+	then
+	echo "Below the content of the log file $log_file" | cat - $log_file | mail -s "Deployment of $repository: success" $email
+fi
 

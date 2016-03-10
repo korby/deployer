@@ -26,6 +26,7 @@ deployer exec
 #vhosts.yml
 repository: git@github.com:korby/some-stuff.git
 method: git clone
+email: me@domain.tld
 vhosts:
   aName:
     branch:oneversionofmystuff
