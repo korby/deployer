@@ -58,7 +58,7 @@ function exec_wrap {
 
 # use only for launch native tasks : allow to run a whole task file in one command (easier to read )
 function exec_bloc_wrap {
-	track "info"  "$1" "${@:2}"
+	track "info" "$1" "${@:2}"
  	execute "${@:2}";
 }
 
@@ -75,7 +75,6 @@ function execute {
             track "error" "Deploy failed because of bash error.";
             exit 1
         fi
-
     fi
 
     if [ "$status" -ne 0 ] ; 
@@ -85,6 +84,15 @@ function execute {
 			then
 			echo "Below the content of the log file $log_file" | cat - $log_file | mail -s "Deployment of $repository: failed" $email
 		fi
+		
+		if [ "$last_ssh_target" != "" ]; 
+			then
+			. $abs_path/lib/replace_vars
+			track "info" "$last_ssh_target:clean-on-failed" "$commmand"
+			replace_vars $abs_path"/tasks-native/clean-on-failed"
+			ssh $last_ssh_target "$commmand"
+		fi
+		
         exit $status
     fi 
 

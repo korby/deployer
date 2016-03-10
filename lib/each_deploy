@@ -36,6 +36,7 @@ do
 	retvalue=`ssh ${!user}@${!host} $commmand`
 	if [ $retvalue != "" ]; then eval $retvalue; fi;
 
+	last_ssh_target=${!user}@${!host}
 	exec_wrap "$id:scp" scp $copy_path/$release_name.tgz ${!user}@${!host}:/tmp/
 	exec_wrap "$id:remote:mvtarball" ssh ${!user}@${!host} mv /tmp/$release_name.tgz ${!deploy_to}/releases/
 	exec_wrap "$id:remote:untar" ssh ${!user}@${!host} tar -zxf ${!deploy_to}/releases/$release_name.tgz -C ${!deploy_to}/releases/
@@ -53,6 +54,7 @@ do
 		fi
 	done
 
+	# publish : change current target to this fresh release
 	replace_vars $abs_path"/tasks-native/current-new-release"
 	exec_bloc_wrap "$id:remote:task:publish" ssh ${!user}@${!host} "$commmand"
 

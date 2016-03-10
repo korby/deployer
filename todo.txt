@@ -1,2 +1,1 @@
-- add some remote clean tasks in case of failure
-- add mail notification
+- config check

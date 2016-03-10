@@ -16,7 +16,7 @@ for hostid in "${hosts[@]}"
 do
 	host="hosts_"$hostid"_host"
 	user="hosts_"$hostid"_user"
-
+    last_ssh_target="AAA"${!user}@${!host}
 	track "screen" "Working on host $green"${!host}"$std"
 	exec_wrap "$id:test:listremotefiles" ssh ${!user}@${!host} ls ${!deploy_to}
 done
