@@ -1,4 +1,17 @@
 function on_exit {
+
+	if [ -z "$status" ]; then status=$?; fi;
+
+	if [ "$switcher" == "deploy" ] && [ "$email" != "" ]; 
+		then
+			if [ "$status" -ne 0 ];
+				then
+				echo "Below the content of the log file $log_file" | cat - $log_file | mail -s "Deployment of $repository: failed" $email
+			else
+				echo "Below the content of the log file $log_file" | cat - $log_file | mail -s "Deployment of $repository: success" $email
+			fi
+	fi
+
 	if [ "$debug" == 1 ] ; then
 		read -p "Agree to delete temporary files [n,Y] ?" agree
 			case $agree in

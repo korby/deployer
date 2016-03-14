@@ -80,17 +80,14 @@ function execute {
     if [ "$status" -ne 0 ] ; 
     then
         track "error" "Deploy failed with status $status.";
-        if [ "$email" != "" ]; 
-			then
-			echo "Below the content of the log file $log_file" | cat - $log_file | mail -s "Deployment of $repository: failed" $email
-		fi
+        # email sent from trap function
 		
 		if [ "$last_ssh_target" != "" ]; 
 			then
 			. $abs_path/lib/replace_vars
-			track "info" "$last_ssh_target:clean-on-failed" "$commmand"
+			track "info" "ssh $last_ssh_target:clean-on-failed" $commmand
 			replace_vars $abs_path"/tasks-native/clean-on-failed"
-			ssh $last_ssh_target "$commmand"
+			ssh $last_ssh_target $commmand
 		fi
 		
         exit $status

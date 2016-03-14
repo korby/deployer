@@ -15,7 +15,9 @@ for hostid in "${hosts[@]}"
 do
 	host="hosts_"$hostid"_host"
 	user="hosts_"$hostid"_user"
-	string_host+=(${!user}@${!host})
+	port="hosts_"$hostid"_port"
+	if [ -z "${!port}" ]; then ssh_target="${!user}@${!host}"; else ssh_target=" -p ${!port} ${!user}@${!host}"; fi;
+	string_host+=($ssh_target)
 done
 
 track "screen" "On all these targets $green${string_host[@]}$std"

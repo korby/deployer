@@ -26,6 +26,8 @@ for hostid in "${hosts[@]}"
 do
 	host="hosts_"$hostid"_host"
 	user="hosts_"$hostid"_user"
+	port="hosts_"$hostid"_port"
+	if [ -z "${!port}" ]; then ssh_target="${!user}@${!host}"; else ssh_target="-p ${!port} ${!user}@${!host}"; fi
 
 	track "screen" "Working on host $green"${!host}"$std"
 
@@ -33,34 +35,40 @@ do
 
 	# Get previous release path
 	replace_vars $abs_path"/tasks-native/previous-release"
-	retvalue=`ssh ${!user}@${!host} $commmand`
+	retvalue=`ssh $ssh_target $commmand`
 	if [ $retvalue != "" ]; then eval $retvalue; fi;
 
-	last_ssh_target=${!user}@${!host}
-	exec_wrap "$id:scp" scp $copy_path/$release_name.tgz ${!user}@${!host}:/tmp/
-	exec_wrap "$id:remote:mvtarball" ssh ${!user}@${!host} mv /tmp/$release_name.tgz ${!deploy_to}/releases/
-	exec_wrap "$id:remote:untar" ssh ${!user}@${!host} tar -zxf ${!deploy_to}/releases/$release_name.tgz -C ${!deploy_to}/releases/
-	exec_wrap "$id:remote:deletetarball" ssh ${!user}@${!host} rm -f ${!deploy_to}/releases/$release_name.tgz
+	last_ssh_target=$ssh_target
+	if [ -z "${!port}" ]; 
+		then 
+		exec_wrap "$id:scp" scp $copy_path/$release_name.tgz $ssh_target:/tmp/; 
+	else
+		exec_wrap "$id:scp" scp -P ${!port} $copy_path/$release_name.tgz ${!user}@${!host}:/tmp/; 
+	fi;
+	
+	exec_wrap "$id:remote:mvtarball" ssh $ssh_target mv /tmp/$release_name.tgz ${!deploy_to}/releases/
+	exec_wrap "$id:remote:untar" ssh $ssh_target tar -zxf ${!deploy_to}/releases/$release_name.tgz -C ${!deploy_to}/releases/
+	exec_wrap "$id:remote:deletetarball" ssh $ssh_target rm -f ${!deploy_to}/releases/$release_name.tgz
 
 	for task in "${tasks[@]}"
 	do
 		if [[ $task == "tasks-common"* ]] ; 
 			then 
 			 replace_vars $abs_path"/"$task
-			 exec_wrap "$id:remote:task:$task" ssh ${!user}@${!host} "$commmand"
+			 exec_wrap "$id:remote:task:$task" ssh $ssh_target $commmand
 			else
 			 replace_vars $task
-			 exec_wrap "$id:remote:task:$task" ssh ${!user}@${!host} "$commmand"
+			 exec_wrap "$id:remote:task:$task" ssh $ssh_target $commmand
 		fi
 	done
 
 	# publish : change current target to this fresh release
 	replace_vars $abs_path"/tasks-native/current-new-release"
-	exec_bloc_wrap "$id:remote:task:publish" ssh ${!user}@${!host} "$commmand"
+	exec_bloc_wrap "$id:remote:task:publish" ssh $ssh_target "$commmand"
 
 	# keep_releases : delete too old releases
 	replace_vars $abs_path"/tasks-native/keep-releases"
-	exec_bloc_wrap "$id:remote:task:keep_releases" ssh ${!user}@${!host} "$commmand"
+	exec_bloc_wrap "$id:remote:task:keep_releases" ssh $ssh_target "$commmand"
 
 done
 

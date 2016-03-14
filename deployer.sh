@@ -10,20 +10,14 @@ if [ ! -d "$log_dir" ] ; then mkdir -p $log_dir; fi
 . $abs_path/lib/wrappers
 . $abs_path/lib/trap
 
-trap "on_exit" SIGINT SIGTERM INT TERM EXIT ERR;
+#trap "on_exit" SIGINT SIGTERM INT TERM EXIT ERR;
+trap "on_exit" SIGTERM TERM EXIT ERR;
 #parse_yaml vhosts.yml
 #parse_yaml hosts.yml
 #parse_yaml vars.yml
 #exit 1
 
-if [ ! -f vhosts.yml ] || [ ! -f hosts.yml ] ; then track "screen" $red"No Configuration's files here!"$std; exit 1; fi
-eval $(parse_yaml vhosts.yml)
-vhosts=(${ids[@]})
-ids=()
-eval $(parse_yaml hosts.yml)
-hosts=(${ids[@]})
-eval $(parse_yaml vars.yml)
-vars=(${ids[@]})
+
 
 release_name=$(date +%Y%m%d%H%M%S)
 log_file=$log_dir"/"$release_name".log"
@@ -42,6 +36,16 @@ do	case "$options" in
 	esac
 done
 case $switcher in
+	init )
+		read -p "Example config files will be written here $(echo -e $yellow `pwd` $std) [N,y] ? " agree
+			case $agree in
+				"y" | "Y" | "yes" | "Yes") 
+					. $abs_path/lib/init;;
+				*) 
+					track "screen" "Aborted."; ;;
+			esac
+         exit 1;;
+
     test )
         action=each_deploy_test ;;
 
@@ -57,7 +61,7 @@ case $switcher in
 		if [ "$debug" == 1 ]; then track "warning" "-d not allowed with $switcher"; exit 1; fi;
 
 		track "warning" "That Command will be executed on each server for each vhost (don't forget you can use these kind of replacement: %deploy_to, %shared_path etc.)!";
-		read -p "Sure to execute it [n,Y] ?" agree
+		read -p "Sure to execute it [N,y] ?" agree
 		case $agree in
 			"y" | "Y" | "yes" | "Yes") 
 				to_exec=${@:2}
@@ -76,6 +80,16 @@ case $switcher in
         track "screen" "Unknown action";
         exit 1;;
 esac
+
+if [ ! -f vhosts.yml ] || [ ! -f hosts.yml ] ; then track "screen" $red"No Configuration's files here!"$std; exit 1; fi
+
+eval $(parse_yaml vhosts.yml)
+vhosts=(${ids[@]})
+ids=()
+eval $(parse_yaml hosts.yml)
+hosts=(${ids[@]})
+eval $(parse_yaml vars.yml)
+vars=(${ids[@]})
 
 counter=1
 for id in "${vhosts[@]}"
