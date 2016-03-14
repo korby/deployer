@@ -1,0 +1,3 @@
+rm -rf %release_path/sites/default/files;
+if [ ! -d %release_path/sites/default ]; then mkdir %release_path/sites/default; fi;
+ln -nfs %shared_path/sites/default/files %release_path/sites/default/files;
