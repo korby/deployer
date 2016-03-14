@@ -6,6 +6,8 @@ serverX:/var/vhosts/branch2
 
 ## Usage
 ```bash
+# create example config files in the current directory
+deployer init
 # performs basic tests (are conf files ok, are servers available via ssh ...)
 deployer test
 # push your code
@@ -50,6 +52,7 @@ hosts:
   prod2:
     host:web2.website.net
     user:root
+    port: 222
 ```
 ```yaml
 #vars.yml

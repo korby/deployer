@@ -24,6 +24,4 @@ function on_exit {
 			track "info" "Cleaning temporary files...";
 			rm -rf $copy_dir"/"$release_name;
 	fi
-	
-	
 }
