@@ -1,0 +1,44 @@
+
+if [ -f ./vhosts.yml ] || [ -f ./hosts.yml ] || [ -f ./vars.yml ]; 
+	then
+	track "screen" $red"Some config files already exist. Aborted."$std; 
+	exit 1;
+fi
+
+cat <<EOF >> ./vhosts.yml
+repository: git@github.com:korby/some-stuff.git
+method: git clone
+email: me@domain.tld
+vhosts:
+  aName:
+    branch:oneversionofmystuff
+    deploy_to: /var/www/somewhere/
+    tasks:
+      - tasks-common/prod-files-renaming
+      - some/path/some-file-containing-bash-commands
+  anotherName:
+    branch:otherversionofmystuff
+    deploy_to: /var/www/somewhere-else/
+    tasks:
+      - tasks-common/prod-files-renaming
+      - some/path/some-file-containing-bash-commands
+EOF
+
+cat <<EOF >> ./hosts.yml
+hosts:
+  prod1:
+    host:web1.website.net
+    user:root
+  prod2:
+    host:web2.website.net
+    user:root
+    port:222
+EOF
+
+cat <<EOF >> ./vars.yml
+vars:
+  composer: /var/www/composer.phar
+  myvar: myvalue
+EOF
+
+track "screen" $green"Example config files written!."$std;
