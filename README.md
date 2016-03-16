@@ -12,7 +12,7 @@ wget https://github.com/korby/deployer/blob/master/deployer.deb?raw=true
 dpkg -i deployer.deb
 ```
 
-### On Macosx and other unix system  
+### On Macosx and other unix systems  
 ```bash
 git clone git@github.com:korby/deployer.git
 cd deployer
