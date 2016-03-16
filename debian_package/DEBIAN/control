@@ -1,0 +1,8 @@
+Package: deployer
+Version: 1.0
+Section: base
+Priority: optional
+Architecture: all
+Depends: bash,readlink,ssh,scp
+Maintainer: André Cianfarani <acianfa@gmail.com>
+Description: Bash tool for deploying "gited" project on multiple servers

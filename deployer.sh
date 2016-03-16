@@ -1,5 +1,6 @@
 #!/bin/bash
-abs_path=$(dirname "$0")
+rpath=`readlink "$0"`
+abs_path=$(dirname "$rpath")
 log_dir=./logs
 copy_dir=./tmp
 keep_releases=4

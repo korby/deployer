@@ -1,0 +1,12 @@
+#deployer completion
+_deployer ()
+{
+  local cur keywords
+  COMPREPLY=()
+  cur=${COMP_WORDS[COMP_CWORD]}
+  keywords="deploy exec init rollback test"
+  COMPREPLY=( $(compgen -W "$keywords" -- $cur ) )
+
+  return 0
+}
+complete -F _deployer deployer

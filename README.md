@@ -4,6 +4,12 @@ Example:
 serverX:/var/vhosts/branch1  
 serverX:/var/vhosts/branch2  
 
+## Install   
+
+### On debian's like system
+
+dpkg -i deployer.deb
+
 ## Usage
 ```bash
 # create example config files in the current directory
