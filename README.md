@@ -18,7 +18,7 @@ git clone git@github.com:korby/deployer.git
 cd deployer
 ln -s /usr/bin/deployer `pwd`/deployer.sh
 ```
-If you have bash_completion installed on your system :
+If you have bash_completion installed on your system :  
 ```bash
 cp debian_package/etc/bash_completions.d/deployer /my/system/path/to/etc/bash_completion.d/
 source /my/system/path/to/etc/bash_completion.d/deployer
