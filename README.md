@@ -6,9 +6,23 @@ serverX:/var/vhosts/branch2
 
 ## Install   
 
-### On debian's like system
-
+### On debian's like system  
+```bash
+wget https://github.com/korby/deployer/blob/master/deployer.deb?raw=true
 dpkg -i deployer.deb
+```
+
+### On Macosx and other unix system  
+```bash
+git clone git@github.com:korby/deployer.git
+cd deployer
+ln -s /usr/bin/deployer `pwd`/deployer.sh
+```
+If you have bash_completion installed on your system :
+```bash
+cp debian_package/etc/bash_completions.d/deployer /my/system/path/to/etc/bash_completion.d/
+source /my/system/path/to/etc/bash_completion.d/deployer
+```
 
 ## Usage
 ```bash
