@@ -3,6 +3,6 @@ Version: 1.0
 Section: base
 Priority: optional
 Architecture: all
-Depends: bash,readlink,ssh,scp
+Depends: coreutils,openssh-client
 Maintainer: André Cianfarani <acianfa@gmail.com>
 Description: Bash tool for deploying "gited" project on multiple servers

@@ -8,7 +8,7 @@ serverX:/var/vhosts/branch2
 
 ### On debian's like systems  
 ```bash
-wget https://github.com/korby/deployer/blob/master/deployer.deb?raw=true
+wget --no-check-certificate https://github.com/korby/deployer/blob/master/deployer.deb?raw=true -O deployer.deb
 dpkg -i deployer.deb
 ```
 
