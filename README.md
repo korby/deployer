@@ -6,7 +6,7 @@ serverX:/var/vhosts/branch2
 
 ## Install   
 
-### On debian's like system  
+### On debian's like systems  
 ```bash
 wget https://github.com/korby/deployer/blob/master/deployer.deb?raw=true
 dpkg -i deployer.deb
