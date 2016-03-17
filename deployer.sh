@@ -1,5 +1,6 @@
 #!/bin/bash
-rpath=`readlink "$0"`
+if [ "$(uname)" != "Linux" ]; then rpath=`readlink "$0"`; else rpath=`readlink -f "$0"`; fi;
+
 abs_path=$(dirname "$rpath")
 log_dir=./logs
 copy_dir=./tmp

@@ -87,20 +87,18 @@ As very first step, **from the machine where you will execute Deployer**, you ne
 
 Then:  
 
-1) Get it
-```bash
-git clone git@github.com:korby/deployer.git
-```
 
-2) Make a directory somewhere from where you will execute Deployer.
+1) Make a directory somewhere from where you will execute Deployer.
 ```bash
 mkdir beautifull-project
 touch beautifull-project/vhosts.yml beautifull-project/hosts.yml
 ```
 
 
-3) Create inside the 3 necessary configuration's files and fill them according to the matrix above
+2) Create inside the 3 necessary configuration's files and fill them according to the matrix above
 ```bash
+cd beautifull-project
+deployer init
 vi beautifull-project/vhosts.yml 
 vi beautifull-project/hosts.yml
 vi beautifull-project/vars.yml
@@ -108,8 +106,7 @@ vi beautifull-project/vars.yml
 
 4) Run Deployer
 ```bash
-cd beautifull-project
-../deployer deploy
+deployer deploy
 ```
 
 ## Logs
