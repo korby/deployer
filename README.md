@@ -99,9 +99,9 @@ touch beautifull-project/vhosts.yml beautifull-project/hosts.yml
 ```bash
 cd beautifull-project
 deployer init
-vi beautifull-project/vhosts.yml 
-vi beautifull-project/hosts.yml
-vi beautifull-project/vars.yml
+vi vhosts.yml 
+vi hosts.yml
+vi vars.yml
 ```
 
 4) Run Deployer
