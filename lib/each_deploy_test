@@ -17,7 +17,7 @@ do
 	host="hosts_"$hostid"_host"
 	user="hosts_"$hostid"_user"
 	port="hosts_"$hostid"_port"
-	if [ -z "$port" ]; then ssh_target="${!user}@${!host}"; else ssh_target=" -p ${!port} ${!user}@${!host}"; fi;
+	if [ -z ${!port} ]; then ssh_target="${!user}@${!host}"; else ssh_target=" -p ${!port} ${!user}@${!host}"; fi;
 
     last_ssh_target=$ssh_target
 	track "screen" "Working on host $green"${!host}"$std"

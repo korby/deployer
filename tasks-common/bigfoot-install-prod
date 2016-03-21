@@ -1,0 +1,9 @@
+export SYMFONY_ENV=prod
+cd %release_path; umask 002; %composer install -n -o
+cd %release_path; umask 002; php app/console assets:install --env=prod
+cd %release_path; umask 002; php app/console --no-debug cache:clear --env=prod --no-warmup
+cd %release_path; umask 002; php app/console --no-debug cache:warmup --env=prod
+cd %release_path; umask 002; php app/console --no-debug cache:clear --env=admin --no-warmup
+cd %release_path; umask 002; php app/console --no-debug cache:warmup --env=admin
+cd %release_path; umask 002; php app/console --no-debug assetic:dump --env=prod
+cd %release_path; umask 002; php app/console --no-debug assetic:dump --env=admin
