@@ -20,6 +20,7 @@ function replace_vars {
 	commmand=${commmand//%deploy_to/${!deploy_to}}
 	commmand=${commmand//%previous_release/$previous_release}
 	commmand=${commmand//%previous_last_release/$previous_last_release}
+	commmand=${commmand//%remote_copy_dir/$remote_copy_dir}
 	commmand=${commmand//%keep_releases/$keep_releases}
 
 	

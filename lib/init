@@ -37,8 +37,9 @@ EOF
 
 cat <<EOF >> ./vars.yml
 vars:
+  keep_releases: 2
+  remote_copy_dir: /tmp
   composer: /var/www/composer.phar
-  myvar: myvalue
 EOF
 
 track "screen" $green"Example config files written!."$std;

@@ -4,6 +4,7 @@ if [ "$(uname)" != "Linux" ]; then rpath=`readlink "$0"`; else rpath=`readlink -
 abs_path=$(dirname "$rpath")
 log_dir=./logs
 copy_dir=./tmp
+remote_copy_dir=/tmp
 keep_releases=4
 if [ ! -d "$log_dir" ] ; then mkdir -p $log_dir; fi
 
@@ -74,8 +75,6 @@ case $switcher in
 
   	"")
 		# If not args
-        track "screen" "This repository $green$repository$std will be cloned by method $green$method$std"
-		track "screen" "and deployed according to this settings :"
     	action=each_info
         ;;
     *)
@@ -92,6 +91,12 @@ eval $(parse_yaml hosts.yml)
 hosts=(${ids[@]})
 eval $(parse_yaml vars.yml)
 vars=(${ids[@]})
+
+if [ "$action" == "each_info" ]; 
+	then
+		track "screen" "This repository "$green"$repository"$std" will be cloned by method $green$method$std"
+		track "screen" "and deployed according to this settings :"
+fi
 
 counter=1
 for id in "${vhosts[@]}"

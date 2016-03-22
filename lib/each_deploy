@@ -41,14 +41,18 @@ do
 	last_ssh_target=$ssh_target
 	if [ -z "${!port}" ]; 
 		then 
-		exec_wrap "$id:scp" scp $copy_path/$release_name.tgz $ssh_target:/tmp/; 
+		replace_vars "scp $copy_path/$release_name.tgz $ssh_target:/%remote_copy_dir/";
+		exec_bloc_wrap "$id:scp" $commmand
 	else
-		exec_wrap "$id:scp" scp -P ${!port} $copy_path/$release_name.tgz ${!user}@${!host}:/tmp/; 
+		replace_vars "scp -P ${!port} $copy_path/$release_name.tgz ${!user}@${!host}:%remote_copy_dir/";
+		exec_bloc_wrap "$id:scp" $commmand
 	fi;
 	
-	exec_wrap "$id:remote:mvtarball" ssh $ssh_target mv /tmp/$release_name.tgz ${!deploy_to}/releases/
-	exec_wrap "$id:remote:untar" ssh $ssh_target tar -zxf ${!deploy_to}/releases/$release_name.tgz -C ${!deploy_to}/releases/
-	exec_wrap "$id:remote:deletetarball" ssh $ssh_target rm -f ${!deploy_to}/releases/$release_name.tgz
+	replace_vars "ssh $ssh_target tar -zxf %remote_copy_dir/$release_name.tgz -C ${!deploy_to}/releases/";
+	exec_bloc_wrap "$id:remote:untar" $commmand
+
+	replace_vars "ssh $ssh_target rm -f %remote_copy_dir/$release_name.tgz";
+	exec_bloc_wrap "$id:remote:deletetarball" $commmand
 
 	for task in "${tasks[@]}"
 	do
