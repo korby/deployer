@@ -7,7 +7,7 @@ fi
 
 cat <<EOF >> ./vhosts.yml
 repository: git@github.com:korby/some-stuff.git
-method: git clone
+method: git clone --single-branch
 email: me@domain.tld
 vhosts:
   aName:

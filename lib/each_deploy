@@ -17,7 +17,7 @@ copy_path=$copy_dir"/"$release_name"/"${!branch}
 
 if [ ! -f "$copy_path/$release_name.tgz" ] ; 
 then
-	exec_wrap "$id:clone" $method "-b ${!branch} --single-branch" $repository $copy_path"/"$release_name
+	exec_wrap "$id:clone" $method " -b ${!branch}" $repository $copy_path"/"$release_name
 	exec_wrap "$id:clone:clean" rm -rf $copy_path"/"$release_name"/".git
 	exec_wrap "$id:compress" tar -zcf $copy_path/$release_name.tgz -C $copy_path"/" $release_name
 fi

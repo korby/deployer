@@ -7,6 +7,12 @@ function replace_vars {
 			original="$@"
 	fi
 	
+	for varid in "${vars[@]}"
+	do
+		val="vars_"$varid
+		commmand=${commmand//%"$varid"/${!val}}
+	done
+	
 	commmand=${original//%release_path/$release_path}
 	commmand=${commmand//%shared_path/$shared_path}
 	commmand=${commmand//%release_name/$release_name}
@@ -15,9 +21,5 @@ function replace_vars {
 	commmand=${commmand//%previous_last_release/$previous_last_release}
 	commmand=${commmand//%keep_releases/$keep_releases}
 
-	for varid in "${vars[@]}"
-	do
-		val="vars_"$varid
-		commmand=${commmand//%"$varid"/${!val}}
-	done
+	
 }
