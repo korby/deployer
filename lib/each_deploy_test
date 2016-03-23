@@ -22,6 +22,12 @@ do
     last_ssh_target=$ssh_target
 	track "screen" "Working on host $green"${!host}"$std"
 	exec_wrap "$id:test:listremotefiles" ssh $ssh_target ls ${!deploy_to}
+
+	. $abs_path/lib/replace_vars
+
+	replace_vars $abs_path"/tasks-native/disk-free"
+	exec_wrap "$id:test:getavailablediskspace" ssh $ssh_target "$commmand"
+
 done
 
 track "screen" "Testing repository access"
