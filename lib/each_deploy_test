@@ -24,4 +24,16 @@ do
 	exec_wrap "$id:test:listremotefiles" ssh $ssh_target ls ${!deploy_to}
 done
 
+track "screen" "Testing repository access"
+copy_path=$copy_dir"/"$release_name"/"${!branch}
+
+if [ ! -f "$copy_path/$release_name.tgz" ] ; 
+then
+	exec_wrap "$id:clone" $method " -b ${!branch}" $repository $copy_path"/"$release_name
+	exec_wrap "$id:clone:clean" rm -rf $copy_path"/"$release_name"/".git
+fi
+
+release_size=`du -sm $copy_path"/"$release_name | cut -f1`
+track "screen" "Release represents "$green"$release_size Mo"$std
+
 track "screen" $green"Ok things seem to be all right"$std

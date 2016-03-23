@@ -1,7 +1,7 @@
 
 if [ -f ./vhosts.yml ] || [ -f ./hosts.yml ] || [ -f ./vars.yml ]; 
 	then
-	track "screen" $red"Some config files already exist. Aborted."$std; 
+	track "screen" $red"Some config files already exist. Aborting."$std; 
 	exit 1;
 fi
 
