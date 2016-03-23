@@ -1,8 +1,11 @@
 # Deployer
-Allow to deploy several branches of a same repository to different paths on many servers.  
-Example:  
-serverX:/var/vhosts/branch1  
-serverX:/var/vhosts/branch2  
+Allows to deploy several branches of a same repository onto their own paths.
+For example, on the server vhost area, it will look like that:  
+/var/vhosts/branchX
+/var/vhosts/branchY  
+/var/vhosts/branchZ  
+
+Of course many target servers can be defined.
 
 ## Install   
 
