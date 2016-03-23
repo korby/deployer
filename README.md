@@ -130,5 +130,12 @@ releases/
 shared/  
 current (a symlink to > releases/xxx)  
 
+## For developers
+Useful .git/hooks/pre-commit to add:  
+```bash
+./build.sh
+git add deployer.deb
+```
+
 
 
