@@ -1,7 +1,7 @@
 # Deployer
-Allows to deploy several branches of a same repository onto their own paths.
+Allows to deploy several branches of a same repository onto their own paths.  
 For example, on the server vhost area, it will look like that:  
-/var/vhosts/branchX
+/var/vhosts/branchX  
 /var/vhosts/branchY  
 /var/vhosts/branchZ  
 
