@@ -23,8 +23,8 @@ do
 	# Get release path to activate and current active release
 	replace_vars $abs_path"/tasks-native/previous-last-release"
 	retvalue=`ssh ${!user}@${!host} $commmand`
-	if [ "$retvalue" != "" ]; 
-		then 
+	if [ "$retvalue" != "" ];
+		then
 			eval $retvalue;
 			track "warning" "Changing current target from $last_release to $previous_last_release"
 			replace_vars $abs_path"/tasks-native/current-previous-last-release"
@@ -43,12 +43,11 @@ do
 			else
 				exec_wrap "$id:task:rollback:archive" $commmand
 			fi
-			
+
 	else
 		track "error" "No previous release found"
 		exit 1;
 	fi;
 
-	
-done
 
+done

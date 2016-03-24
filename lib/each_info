@@ -22,5 +22,3 @@ done
 
 track "screen" "On all these targets $green${string_host[@]}$std"
 track "screen" "These tasks will be executed on each target in this order $green${tasks[@]}$std"
-
-

@@ -7,10 +7,10 @@ done;
 pre_last=0;
 for dir in $(ls %deploy_to/releases/);
 do
-	if [ $dir != $last ]; 
-	then 
-		if [ $dir -gt $pre_last ]; 
-		then 
+	if [ $dir != $last ];
+	then
+		if [ $dir -gt $pre_last ];
+		then
 			pre_last=$dir;
 		fi;
 	fi;

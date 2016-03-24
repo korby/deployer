@@ -15,7 +15,7 @@ track "screen" "$green$counter) Project $id$std"
 
 copy_path=$copy_dir"/"$release_name"/"${!branch}
 
-if [ ! -f "$copy_path/$release_name.tgz" ] ; 
+if [ ! -f "$copy_path/$release_name.tgz" ] ;
 then
 	exec_wrap "$id:clone" $method " -b ${!branch}" $repository $copy_path"/"$release_name
 	exec_wrap "$id:clone:clean" rm -rf $copy_path"/"$release_name"/".git
@@ -39,15 +39,15 @@ do
 	if [ $retvalue != "" ]; then eval $retvalue; fi;
 
 	last_ssh_target=$ssh_target
-	if [ -z "${!port}" ]; 
-		then 
+	if [ -z "${!port}" ];
+		then
 		replace_vars "scp $copy_path/$release_name.tgz $ssh_target:/%remote_copy_dir/";
 		exec_bloc_wrap "$id:scp" $commmand
 	else
 		replace_vars "scp -P ${!port} $copy_path/$release_name.tgz ${!user}@${!host}:%remote_copy_dir/";
 		exec_bloc_wrap "$id:scp" $commmand
 	fi;
-	
+
 	replace_vars "ssh $ssh_target tar -zxf %remote_copy_dir/$release_name.tgz -C ${!deploy_to}/releases/";
 	exec_bloc_wrap "$id:remote:untar" $commmand
 
@@ -56,8 +56,8 @@ do
 
 	for task in "${tasks[@]}"
 	do
-		if [[ $task == "tasks-common"* ]] ; 
-			then 
+		if [[ $task == "tasks-common"* ]] ;
+			then
 			 replace_vars $abs_path"/"$task
 			 exec_wrap "$id:remote:task:$task" ssh $ssh_target $commmand
 			else

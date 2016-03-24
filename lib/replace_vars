@@ -1,6 +1,6 @@
 # Use to change all pseudo vars by their value in tasks file 
 function replace_vars {
-	if [ -f "$1" ]; 
+	if [ -f "$1" ];
 		then
 			original=$(cat $1)
 		else
@@ -14,7 +14,7 @@ function replace_vars {
 		val="vars_"$varid
 		commmand=${commmand//%"$varid"/${!val}}
 	done
-	
+
 	commmand=${commmand//%shared_path/$shared_path}
 	commmand=${commmand//%release_name/$release_name}
 	commmand=${commmand//%deploy_to/${!deploy_to}}
@@ -23,5 +23,5 @@ function replace_vars {
 	commmand=${commmand//%remote_copy_dir/$remote_copy_dir}
 	commmand=${commmand//%keep_releases/$keep_releases}
 
-	
+
 }

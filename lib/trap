@@ -2,7 +2,7 @@ function on_exit {
 
 	if [ -z "$status" ]; then status=$?; fi;
 
-	if [ "$switcher" == "deploy" ] && [ "$email" != "" ]; 
+	if [ "$switcher" == "deploy" ] && [ "$email" != "" ];
 		then
 			if [ "$status" -ne 0 ];
 				then
@@ -15,7 +15,7 @@ function on_exit {
 	if [ "$debug" == 1 ] ; then
 		read -p "Agree to delete temporary files [n,Y] ?" agree
 			case $agree in
-				"y" | "Y" | "yes" | "Yes") 
+				"y" | "Y" | "yes" | "Yes")
 					track "info" "Cleaning temporary files...";
 					rm -rf $copy_dir"/"$release_name;;
 				*) track "info" "Aborted. Don't forget to delete $copy_dir/$release_name after debug" ;;

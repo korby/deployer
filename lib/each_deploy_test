@@ -33,7 +33,7 @@ done
 track "screen" "Testing repository access"
 copy_path=$copy_dir"/"$release_name"/"${!branch}
 
-if [ ! -f "$copy_path/$release_name.tgz" ] ; 
+if [ ! -f "$copy_path/$release_name.tgz" ] ;
 then
 	exec_wrap "$id:clone" $method " -b ${!branch}" $repository $copy_path"/"$release_name
 	exec_wrap "$id:clone:clean" rm -rf $copy_path"/"$release_name"/".git

@@ -42,9 +42,9 @@ case $switcher in
 	init )
 		read -p "Example config files will be written here $(echo -e $yellow `pwd` $std) [N,y] ? " agree
 			case $agree in
-				"y" | "Y" | "yes" | "Yes") 
+				"y" | "Y" | "yes" | "Yes")
 					. $abs_path/lib/init;;
-				*) 
+				*)
 					track "screen" "Aborted."; ;;
 			esac
          exit 1;;
@@ -66,7 +66,7 @@ case $switcher in
 		track "warning" "That Command will be executed on each server for each vhost (don't forget you can use these kind of replacement: %deploy_to, %shared_path etc.)!";
 		read -p "Sure to execute it [N,y] ?" agree
 		case $agree in
-			"y" | "Y" | "yes" | "Yes") 
+			"y" | "Y" | "yes" | "Yes")
 				to_exec=${@:2}
 	    		action=each_exec;;
 			*) track "info" "Aborted."; exit 1;;
@@ -92,7 +92,7 @@ hosts=(${ids[@]})
 eval $(parse_yaml vars.yml)
 vars=(${ids[@]})
 
-if [ "$action" == "each_info" ]; 
+if [ "$action" == "each_info" ];
 	then
 		track "screen" "This repository "$green"$repository"$std" will be cloned by method $green$method$std"
 		track "screen" "and deployed according to this settings :"

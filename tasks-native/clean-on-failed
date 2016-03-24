@@ -1,5 +1,5 @@
 if [ "%release_name" != "" ] ; 
-	then 
+	then
 	if [ -f /tmp/%release_name.tgz ] ; then rm /tmp/%release_name.tgz; fi;
 	if [ -f %deploy_to/releases/%release_name.tgz ] ; then rm %release_name.tgz; fi;
 	if [ -d %deploy_to/releases/%release_name ] ; then rm -rf %deploy_to/releases/%release_name; fi;

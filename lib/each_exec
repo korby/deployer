@@ -19,4 +19,3 @@ do
 	track "warning" "Executing: $commmand"
 	exec_wrap "$id:exec" ssh ${!user}@${!host} $commmand
 done
-

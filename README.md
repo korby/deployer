@@ -21,7 +21,7 @@ git clone git@github.com:korby/deployer.git
 cd deployer
 ln -s /usr/bin/deployer `pwd`/deployer.sh
 ```
-If you have bash_completion installed on your system : 
+If you have bash_completion installed on your system :
 ```bash
 cp debian_package/etc/bash_completions.d/deployer /my/system/path/to/etc/bash_completion.d/
 source /my/system/path/to/etc/bash_completion.d/deployer
@@ -102,7 +102,7 @@ touch beautifull-project/vhosts.yml beautifull-project/hosts.yml
 ```bash
 cd beautifull-project
 deployer init
-vi vhosts.yml 
+vi vhosts.yml
 vi hosts.yml
 vi vars.yml
 ```
@@ -125,7 +125,7 @@ B) Other tasks
 You can store them where you want, provided you indicate the path in the yaml configuration file.
 
 ## Vars
-Add all vars you need in the vars.yml. You can get and use the corresponding value anywhere in a task using that pattern : %myvar 
+Add all vars you need in the vars.yml. You can get and use the corresponding value anywhere in a task using that pattern : %myvar
 
 ## WARNING
 Deployer use a vhost directory architecture similar to Capistrano, ie :  
@@ -139,6 +139,3 @@ Useful .git/hooks/pre-commit to add:
 ./build.sh
 git add deployer.deb
 ```
-
-
-
