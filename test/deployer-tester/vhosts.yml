@@ -1,0 +1,11 @@
+repository: git@github.com:korby/project-void4test.git
+method: git clone
+email: a.cianfarani@c2is.fr
+vhosts:
+  website:
+    branch: master
+    deploy_to: /var/www/deployerwebsite
+    tasks:
+	# defulat toto
+      - tasks-common/preprod-files-renaming
+      - tasks-common/drupal-symlink

@@ -1,0 +1,3 @@
+vars:
+  composer: /var/www/composer.phar
+  remote_copy_dir: /var/log

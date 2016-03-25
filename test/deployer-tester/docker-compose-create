@@ -1,0 +1,37 @@
+rsa=$(cat ~/.ssh/id_rsa.pub)
+cat <<EOF >> ./docker-compose.yml
+db:
+    image: mariadb
+    ports:
+        - 33060:3306
+    environment:
+        MYSQL_DATABASE: website
+        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: myadmin
+    environment:
+     - PMA_ARBITRARY=1
+    restart: always
+    ports:
+        - 8000:8080
+    links:
+        - db
+c2isapachefpm:
+    image: c2is/debian-apache-php-fpm-ssh
+    environment:
+        # Default: website.docker
+        WEBSITE_HOST: website.docker
+        # Default: website
+        VHOST_DIRNAME: deployerwebsite
+        # Default: no, DocumentRoot have not the trailing /web/
+        SYMFONY_VHOST_COMPLIANT: "no"
+        CAPISTRANO_VHOST_COMPLIANT: "yes"
+        # you can get the value with : cat ~/.ssh/id_rsa.pub
+        SSH_KEY: "$rsa"
+    ports:
+        - "222:22"
+        - "800:80"
+    links:
+        - db
+EOF
