@@ -12,10 +12,12 @@ for hostid in "${hosts[@]}"
 do
 	host="hosts_"$hostid"_host"
 	user="hosts_"$hostid"_user"
+	port="hosts_"$hostid"_port"
+	if [ -z "${!port}" ]; then ssh_target="${!user}@${!host}"; else ssh_target="-p ${!port} ${!user}@${!host}"; fi
 
 	. $abs_path/lib/replace_vars
 	replace_vars $to_exec
 	track "screen" "Working on host $green"${!host}"$std"
 	track "warning" "Executing: $commmand"
-	exec_wrap "$id:exec" ssh ${!user}@${!host} $commmand
+	exec_wrap "$id:exec" ssh $ssh_target $commmand
 done

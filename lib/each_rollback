@@ -15,6 +15,8 @@ for hostid in "${hosts[@]}"
 do
 	host="hosts_"$hostid"_host"
 	user="hosts_"$hostid"_user"
+	port="hosts_"$hostid"_port"
+	if [ -z "${!port}" ]; then ssh_target="${!user}@${!host}"; else ssh_target="-p ${!port} ${!user}@${!host}"; fi
 
 	track "screen" "Working on host $green"${!host}"$std"
 
@@ -22,7 +24,7 @@ do
 
 	# Get release path to activate and current active release
 	replace_vars $abs_path"/tasks-native/previous-last-release"
-	retvalue=`ssh ${!user}@${!host} $commmand`
+	retvalue=`ssh $ssh_target $commmand`
 	if [ "$retvalue" != "" ];
 		then
 			eval $retvalue;
@@ -32,11 +34,11 @@ do
 				then
 				track "info" "SIMULATION : $id:task:rollback" $commmand
 			else
-				exec_wrap "$id:task:rollback" ssh ${!user}@${!host} $commmand
+				exec_wrap "$id:task:rollback" ssh $ssh_target $commmand
 			fi
 
 			track "warning" "Backup release rollbacked"
-			commmand="ssh ${!user}@${!host} mv $last_release ${!deploy_to}/$last_release_name'-rollbacked'"
+			commmand="ssh $ssh_target mv $last_release ${!deploy_to}/$last_release_name'-rollbacked'"
 			if [ "$simulate" == 1 ];
 				then
 				track "info" "SIMULATION : $id:task:rollback:archive" $commmand
