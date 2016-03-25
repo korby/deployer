@@ -138,5 +138,6 @@ Useful .git/hooks/pre-commit to add:
 ```bash
 ./build.sh
 git add deployer.deb
+cd test
 ./test.sh
 ```
