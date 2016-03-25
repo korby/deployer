@@ -32,9 +32,10 @@ host=`echo $DOCKER_HOST | cut -d/ -f3 | cut -d: -f1`
 sed "s/host:.*$/host:$host/g" hosts.yml > hosts
 mv hosts hosts.yml
 
+echo "n" | deployer init
 deployer test
 deployer deploy
-deployer deploy
+echo "y" | deployer -d deploy
 deployer -s rollback
 deployer rollback
 echo "y" | deployer exec ls %deploy_to
