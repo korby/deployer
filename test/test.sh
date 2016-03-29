@@ -20,7 +20,7 @@ if [ "$(uname)" == "Darwin" ];
   eval $(docker-machine env default)
 fi
 
-container_running=`docker ps | grep c2is/debian-apache-php-fpm-ssh`
+container_running=`docker ps | grep deployertester`
 if [ "$container_running" == "" ] ;
   then
     docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)

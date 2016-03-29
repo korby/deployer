@@ -17,7 +17,7 @@ phpmyadmin:
         - 8000:8080
     links:
         - db
-c2isapachefpm:
+deployer-server:
     image: c2is/debian-apache-php-fpm-ssh
     environment:
         # Default: website.docker
