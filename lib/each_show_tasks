@@ -1,0 +1,23 @@
+# 	$id
+# 	$repository
+# 	$method
+# 	$release_name
+#	$release_path
+#	$shared_path
+#	${!branch}
+#   ${!deploy_to}
+#	${hosts[@]}
+#	${tasks[@]}
+
+track "screen" "Showing tasks of vhost $green"$id"$std"
+for task in "${tasks[@]}"
+do
+	if [[ $task == "tasks-common"* ]] ;
+		then
+		 track "screen" "Task $green"$abs_path"/"$task"$std:"
+		 cat $abs_path"/"$task
+		else
+		track "screen" "Task $green"$task"$std:"
+		 cat $task
+	fi
+done

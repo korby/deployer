@@ -56,6 +56,9 @@ case $1 in
     test )
         action=each_deploy_test ;;
 
+    showtasks )
+        action=each_show_tasks ;;
+
     deploy )
 	     track "screen" $green"Deploying release $release_name and loging in $log_file"$std;
        action=each_deploy ;;
