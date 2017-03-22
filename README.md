@@ -23,7 +23,7 @@ ln -s /usr/bin/deployer `pwd`/deployer.sh
 ```
 If you have bash_completion installed on your system :
 ```bash
-cp debian_package/etc/bash_completions.d/deployer /my/system/path/to/etc/bash_completion.d/
+cp debian_package/etc/bash_completion.d/deployer /my/system/path/to/etc/bash_completion.d/
 source /my/system/path/to/etc/bash_completion.d/deployer
 ```
 
@@ -33,6 +33,8 @@ source /my/system/path/to/etc/bash_completion.d/deployer
 deployer init
 # performs basic tests (are conf files ok, are servers available via ssh ...)
 deployer test
+# show tasks contents of each vhost
+deployer showtasks
 # push your code
 deployer deploy
 # debug mode, after push tentative deployer keep temporary files
