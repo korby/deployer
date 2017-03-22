@@ -5,21 +5,6 @@ if [ ! -d "$path" ]; then cp -R deployer-tester $path; fi
 cd $path
 if [ ! -f "docker-compose.yml" ]; then . docker-compose-create; fi
 
-if [ "$(uname)" == "Darwin" ];
-  then
-  echo "Docker machine active ?"
-  docker-machine active
-  if [ "$?" -ne 0 ] ;
-    then
-      echo "Starting docker-machine"
-    docker-machine start default
-  fi
-
-  echo "Declaring docker-machine env"
-  sleep 3
-  eval $(docker-machine env default)
-fi
-
 container_running=`docker ps | grep deployertester`
 if [ "$container_running" == "" ] ;
   then
