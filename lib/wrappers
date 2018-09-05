@@ -82,12 +82,16 @@ function execute {
         track "error" "Deploy failed with status $status.";
         # email sent from trap function
 
-		if [ "$last_ssh_target" != "" ];
-			then
-			. $abs_path/lib/replace_vars
-			track "info" "ssh $last_ssh_target:clean-on-failed" $commmand
-			replace_vars $abs_path"/tasks-native/clean-on-failed"
-			ssh $last_ssh_target $commmand
+		if [ "$last_ssh_target" != "" ]; 
+        then
+            if [ "$debug" == 1 ] ; then
+                track "info" "mode debug is active, so don't launch ssh $last_ssh_target:clean-on-failed, remeber to clean manually"
+			else
+    			. $abs_path/lib/replace_vars
+    			track "info" "ssh $last_ssh_target:clean-on-failed" $commmand
+    			replace_vars $abs_path"/tasks-native/clean-on-failed"
+    			ssh $last_ssh_target $commmand
+            fi
 		fi
 
         exit $status
