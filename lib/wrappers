@@ -85,7 +85,7 @@ function execute {
 		if [ "$last_ssh_target" != "" ]; 
         then
             if [ "$debug" == 1 ] ; then
-                track "info" "mode debug is active, so don't launch ssh $last_ssh_target:clean-on-failed, remeber to clean manually"
+                track "info" "mode debug is active, so don't launch ssh $last_ssh_target:clean-on-failed, remember to clean manually"
 			else
     			. $abs_path/lib/replace_vars
     			track "info" "ssh $last_ssh_target:clean-on-failed" $commmand
