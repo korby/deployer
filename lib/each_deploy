@@ -25,11 +25,17 @@ fi
 for hostid in "${hosts[@]}"
 do
 	host="hosts_"$hostid"_host"
+	if [ "$user_vhost" != "" ]; then
+		user="$user_vhost"
+	else
+	    user="hosts_"$hostid"_user"
+	fi
 	user="hosts_"$hostid"_user"
 	port="hosts_"$hostid"_port"
 	if [ -z "${!port}" ]; then ssh_target="${!user}@${!host}"; else ssh_target="-p ${!port} ${!user}@${!host}"; fi
 
 	track "screen" "Working on host $green"${!host}"$std"
+    track "screen" $yellow"The vhost user "${!user_vhost}" override the host user $std"
 
 	. $abs_path/lib/replace_vars
 

@@ -108,7 +108,7 @@ fi
 counter=1
 for id in "${vhosts[@]}"
 do
-
+  user_vhost="vhosts_"$id"_user"
 	branch="vhosts_"$id"_branch"
 	deploy_to="vhosts_"$id"_deploy_to"
 	tasks="vhosts_"$id"_tasks"
