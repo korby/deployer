@@ -1,5 +1,6 @@
 #!/bin/sh
 cwd=`pwd`
+mkdir -p debian_package/usr/share/deployer/
 cp deployer.sh debian_package/usr/share/deployer/
 cp -R lib debian_package/usr/share/deployer/
 cp -R tasks-common debian_package/usr/share/deployer/
