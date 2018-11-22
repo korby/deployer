@@ -30,7 +30,6 @@ do
 	else
 	    user="hosts_"$hostid"_user"
 	fi
-	user="hosts_"$hostid"_user"
 	port="hosts_"$hostid"_port"
 	if [ -z "${!port}" ]; then ssh_target="${!user}@${!host}"; else ssh_target="-p ${!port} ${!user}@${!host}"; fi
 
