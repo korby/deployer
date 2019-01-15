@@ -64,10 +64,10 @@ do
 		if [[ $task == "tasks-common"* ]] ;
 			then
 			 replace_vars $abs_path"/"$task
-			 exec_wrap "$id:remote:task:$task" ssh $ssh_target $commmand
+			 exec_wrap "$id:remote:task:$task" ssh $ssh_target "$commmand"
 			else
 			 replace_vars $task
-			 exec_wrap "$id:remote:task:$task" ssh $ssh_target $commmand
+			 exec_wrap "$id:remote:task:$task" ssh $ssh_target "$commmand"
 		fi
 	done
 
