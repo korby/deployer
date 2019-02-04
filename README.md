@@ -19,7 +19,7 @@ dpkg -i deployer.deb
 ```bash
 git clone git@github.com:korby/deployer.git
 cd deployer
-ln -s /usr/bin/deployer `pwd`/deployer.sh
+ln -s `pwd`/deployer.sh /usr/bin/deployer
 ```
 If you have bash_completion installed on your system :
 ```bash
